@@ -33,7 +33,7 @@ setcs:
 
     ; Prior to switching to user mode set the selector registers
     ; to a user mode data selector. Stack Segment (SS) will be done
-    ; witth the IRETD instruction.
+    ; with the IRETD instruction.
     mov eax, DATA32_SEL_DPL3 | RPL3
     mov ds, eax
     mov es, eax
@@ -124,6 +124,9 @@ VIDMEM_SEL_DPL3 equ V_text - gdt_start
 TIMES 512-($-$$) db 0x00
 
 bits 32
+; User mode has a vstart (ORG) of 0 since this code will be running
+; in a segment with base=0x8000. This code is loaded into memory
+; at physical address 0x8000.
 section user vstart=0
 usermode_entry:
     ; Print USER in upper left corner of console
