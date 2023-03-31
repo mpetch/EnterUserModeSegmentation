@@ -21,7 +21,8 @@ bits 16
     mov eax, cr0
     or al, 1                   ; Enable PE (Protected Mode) bit in CR0
     mov cr0, eax
-    jmp 0x08:setcs             ; Enter 32-bit protected mode
+    jmp CODE32_SEL_DPL0 | RPL0:setcs
+                               ; Enter 32-bit protected mode
 
 ; 32-bit protected mode here
 bits 32
