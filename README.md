@@ -10,7 +10,9 @@ of 0x8000-1.
 The bootloader simply loads a stage2 binary at memory location
 0x7e00. The stage2 binary contains the code to enter protected
 mode and then transfers control to the user mode code that
-will be loaded into memory at physical address 0x8000.
+will be loaded into memory at physical address 0x8000. Since
+the code and data is all loaded below address 0x100000 the
+A20 line isn't enabled for this demonstration.
 
 This code was in response to a user asking for sample code
 in this [Stackoverflow question](https://stackoverflow.com/questions/75862100/switching-segments-in-the-gdt-x86-32bit-protected-mode)
