@@ -59,50 +59,49 @@ setcs:
     ; Transfer control to user mode (ring 3)
     iretd
 
-
 gdt_start:
 ; NULL selector
     dq 0x0             ; 8 bytes
 
-; Kernel code selector (DPL=0), 1-byte gran, base=0x0000, limit=0x7fff
+; Kernel code selector (DPL=0), 1-byte gran, base=0x0000, limit=0x8000
 kernel_code:
-    dw 0x8000-1        ; segment length, bits 0-15
+    dw 0x8000          ; segment length, bits 0-15
     dw 0x0             ; segment base, bits 0-15
     db 0x0             ; segment base, bits 16-23
     db 10011010b       ; access flags (8 bits)
     db 01000000b       ; flags (4 bits) + segment length, bits 16-19
     db 0x0             ; segment base, bits 24-31
 
-; Kernel data selector (DPL=0), 1-byte gran, base=0x0000, limit=0x7fff
+; Kernel data selector (DPL=0), 1-byte gran, base=0x0000, limit=0x8000
 kernel_data:
-    dw 0x8000-1        ; segment length, bits 0-15
+    dw 0x8000          ; segment length, bits 0-15
     dw 0x0             ; segment base, bits 0-15
     db 0x0             ; segment base, bits 16-23
     db 10010010b       ; access flags (8 bits)
     db 01000000b       ; flags (4 bits) + segment length, bits 16-19
     db 0x0             ; segment base, bits 24-31
 
-; User code selector (DPL=3), 1-byte gran, base=0x8000, limit=0x7fff
+; User code selector (DPL=3), 1-byte gran, base=0x8000, limit=0x8000
 U_code:
-    dw 0x8000-1        ; segment length, bits 0-15
+    dw 0x8000          ; segment length, bits 0-15
     dw 0x8000          ; segment base, bits 0-15
     db 0x0             ; segment base, bits 16-23
     db 11111010b       ; access flags (8 bits)
     db 01000000b       ; flags (4 bits) + segment length, bits 16-19
     db 0x00            ; segment base, bits 24-31
 
-; User data selector (DPL=3), 1-byte gran, base=0x8000, limit=0x7fff
+; User data selector (DPL=3), 1-byte gran, base=0x8000, limit=0x8000
 U_data:
-    dw 0x8000-1        ; segment length, bits 0-15
+    dw 0x8000          ; segment length, bits 0-15
     dw 0x8000          ; segment base, bits 0-15
     db 0x0             ; segment base, bits 16-23
     db 11110010b       ; access flags (8 bits)
     db 01000000b       ; flags (4 bits) + segment length, bits 16-19
     db 0x00            ; segment base, bits 24-31
 
-; Video memory selector (DPL=3), 1-byte gran, base=0xb8000, limit=0x7fff
+; Video memory selector (DPL=3), 1-byte gran, base=0xb8000, limit=0x8000
 V_text:
-    dw 0x8000-1        ; segment length, bits 0-15
+    dw 0x8000          ; segment length, bits 0-15
     dw 0x8000          ; segment base, bits 0-15
     db 0x0b            ; segment base, bits 16-23
     db 11110010b       ; access flags (8 bits)
